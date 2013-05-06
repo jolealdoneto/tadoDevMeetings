@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+
+   <title>tado dev meeting</title>
+
+   <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+   <meta name="author" content="Hakim El Hattab">
+
+   <meta name="apple-mobile-web-app-capable" content="yes"/>
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+   <link rel="stylesheet" href="../../lib/revealjs/css/reveal.min.css">
+   <link rel="stylesheet" href="../../tadotheme/fonts/avenir/avenir.css">
+   <link rel="stylesheet" href="../../tadotheme/fonts/tadoicons/tadoicons.css">
+   <link rel="stylesheet" href="../../tadotheme/tado.css" id="theme">
+   <!--<link rel="stylesheet" href="../lib/revealjs/css/theme/beige.css" id="theme">-->
+
+   <!-- For syntax highlighting -->
+   <link rel="stylesheet" href="../../lib/revealjs/lib/css/zenburn.css">
+
+   <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+   <script>
+      document.write('<link rel="stylesheet" href="../../lib/revealjs/css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+   </script>
+
+   <!--[if lt IE 9]>
+   <script src="../lib/revealjs/lib/js/html5shiv.js"></script>
+   <![endif]-->
+   <style>
+       img.noborder { border: 0 !important; box-shadow: none !important; }
+   </style>
+</head>
+
+<body>
+
+<div class="reveal">
+
+   <!-- Any section element inside of this container is displayed as a slide -->
+   <div class="slides">
+      <section>
+         <h3>
+            <br>
+         </h3>
+
+         <h3>#jolealdoneto</h3>
+
+         <h1>#tado<span style="color: #fab907;">dev</span>meeting</h1>
+
+         <div>
+            <br>
+         </div>
+         <div>06.05.2013 already! OMG!</div>
+
+
+      </section>
+      <section>
+         <section>
+            <h2>Since we were talking about testing..</h2>
+            <h3 style="color: #606060;">I'll tell you what we use in the mobile development</h3>
+            <div>
+                <img src="nokia.jpg" /> <br/>
+                Top-device in the mobile-development department
+            </div>
+         </section>
+         <section>
+            <h2>Before..</h2>
+
+            <div style="width: 50.0%;float: left;">
+               <img src="old-phone.jpg" style="width: 90.0%;">
+            </div>
+            <div style="width: 50.0%;float: right; display: table; height: 400px;">
+                <div style="display: table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;">
+                    Manual testing =/
+                </div>
+            </div>
+
+
+         </section>
+         <section>
+            <img src="grunt.png" class="noborder">
+            <h4>The JavaScript Task Runner</h4>
+         </section>
+          <section>
+             <h4>It allows you to do stuff like..</h4>
+
+             <pre><code class="javascript">
+        it('Can accomplish the login procedure', function() {
+            ...
+        });
+        it('Switch to the manual mode and change the manual temp', function() {
+            ...
+        });
+        it('Setting the schedule', function() {
+            ...
+        });
+             </code></pre>
+          </section>
+          <section>
+             <h1>Cool, huh?!</h1>
+             <img src="gruntangular.png" />
+          </section>
+          <section>
+            <h2> Why AngularJS? </h2>
+            <ul>
+                <li>Because of angular's dependency injection, it's very easy to mock all the objects</li>
+                <li>And this is provided out-of-the-box by the angular-mock.js</li>
+            </ul>
+          </section>
+          <section>
+             <pre><code class="javascript">
+        LoginCtrl = _$controller('LoginCtrl', {
+          $scope: scope
+        });
+
+        scope.login = 'simulator';
+        scope.password = 'simulator';
+
+        $httpBackend.expectGET(/getAppUsers\?.*&password=.+&username=.+/gi).respond({success: true, appUsers: [ {nickname: 'Jose'}, { nickname: 'EnergyBob'} ], currentUserId: 11});
+
+        $httpBackend.expectGET(/chooseDeviceType/g).respond({});
+
+        scope.doLogin();
+
+        $httpBackend.flush();
+
+        // instantiate
+        ChooseDeviceTypeCtrl = _$controller('ChooseDeviceTypeCtrl', {
+          $scope: scope
+        });
+
+        // set as phone
+        scope.setDeviceType('phone');
+        
+        // instantiate
+        ChooseUserCtrl = _$controller('ChooseUserCtrl', {
+          $scope: scope
+        });
+
+        expect(UserCredentials.appUsers.length).toEqual(2);
+
+        scope.nicknamechosen = 'EnergyBob';
+        scope.checkIfExists();
+        // exists
+        expect(scope.buttonFlag).toBe(true);
+        scope.nicknamechosen = 'Im not in the list!';
+        scope.checkIfExists();
+        expect(scope.buttonFlag).toBe(false);
+
+             </code></pre>
+          </section>
+          <section>
+              <h1>DEMO</h1>
+          </section>
+      </section>
+      <section>
+         <h2>Credits for the slide engine</h2>
+
+         <h1>Mika - @macrosak</h3>
+
+         <div><a href="https://github.com/macrosak/tadoDevMeetings" rel="noreferrer">https://github.com/macrosak/tadoDevMeetings</a></div>
+
+         <br/>
+         <h5>RevealJS <a href="http://lab.hakim.se/reveal-js">http://lab.hakim.se/reveal-js</a></h5>
+      </section>
+   </div>
+
+
+</div>
+
+<script src="../../lib/revealjs/lib/js/head.min.js"></script>
+<script src="../../lib/revealjs/js/reveal.min.js"></script>
+
+<script>
+
+   // Full list of configuration options available here:
+   // https://github.com/hakimel/reveal.js#configuration
+   var multiplex = {
+      secret: null,
+      id: "47c36c17fffd7c5e",
+      url: 'revealjs.jit.su:80'
+   }
+
+   if (location.search.indexOf('master') >= 0) {
+      multiplex.secret = "13655869758252677986";
+   }
+
+
+   Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+      multiplex: multiplex,
+
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+         { src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js', async: true },
+         { src: '../../lib/revealjs/plugin/multiplex/client.js', async: true },
+         { src: '../../lib/revealjs/plugin/multiplex/master.js', async: true },
+
+         { src: '../../lib/revealjs/lib/js/classList.js', condition: function () {
+            return !document.body.classList;
+         } },
+         { src: '../../lib/revealjs/plugin/markdown/showdown.js', condition: function () {
+            return !!document.querySelector('[data-markdown]');
+         } },
+         { src: '../../lib/revealjs/plugin/markdown/markdown.js', condition: function () {
+            return !!document.querySelector('[data-markdown]');
+         } },
+         { src: '../../lib/revealjs/plugin/highlight/highlight.js', async: true, callback: function () {
+            hljs.initHighlightingOnLoad();
+         } },
+         { src: '../../lib/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function () {
+            return !!document.body.classList;
+         } },
+         { src: '../../lib/revealjs/plugin/notes/notes.js', async: true, condition: function () {
+            return !!document.body.classList;
+         } }
+
+         // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+         // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+
+
+   });
+
+</script>
+
+</body>
+</html>
